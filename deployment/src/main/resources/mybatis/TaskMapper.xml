@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudyellow.scheduler.mapper.TaskMapper">
+
+    <select id="selectAll" resultType="com.cloudyellow.scheduler.model.TaskModel">
+        select id,
+        task_name taskName,
+        task_type taskType,
+        task_engine taskEngine,
+        task_status taskStatus,
+        create_time createTime,
+        update_time updateTime
+        from TASK
+    </select>
+
+</mapper>

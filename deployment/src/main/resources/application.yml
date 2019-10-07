@@ -1,0 +1,21 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: dbaeschedulerserver
+  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bdaeschedulerserver?useSSL=false&serverTimezone=UTC
+    username: root
+    password: meiyoumima
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-idle: 20
+      max-wait-millis: 200
+
+mybatis:
+  type-aliases-package: com.cloudyellow.scheduler.model
+  mapper-locations: classpath:mybatis/*Mapper.xml

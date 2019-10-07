@@ -1,0 +1,74 @@
+{
+  "pipeline_name": "batch_demo_pipeline",
+  "id": "batch_demo_pipeline",
+  "desc": {
+    "csv_input_data": {
+      "column": [
+        {
+          "name": "timestamp",
+          "type": "date"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "age",
+          "type": "int"
+        },
+        {
+          "name": "sex",
+          "type": "float"
+        },
+        {
+          "name": "others",
+          "type": "string"
+        }
+      ],
+      "type": "csv"
+    },
+    "csv_output_data": {
+      "column": [
+        {
+          "name": "timestamp",
+          "type": "date"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "age",
+          "type": "int"
+        },
+        {
+          "name": "sex",
+          "type": "float"
+        }
+      ],
+      "type": "csv"
+    }
+  },
+  "task": {
+    "demo_task": {
+      "from": "csv_input_data",
+      "to": "csv_output_data",
+      "engine": "ap",
+      "type": "batch"
+    },
+    "demo02_task": {
+      "from": "csv_input_data",
+      "to": "csv_output_data",
+      "engine": "ap",
+      "type": "stream"
+    }
+  },
+  "context": {
+    "sprkdisp": {
+      "interval": "1MIN"
+    },
+    "olap": {
+      "interval": "1MIN"
+    }
+  }
+}

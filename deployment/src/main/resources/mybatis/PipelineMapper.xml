@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudyellow.scheduler.mapper.PipelineMapper">
+
+    <select id="selectByName" resultType="com.cloudyellow.scheduler.model.PipelineModel">
+        select id,
+        pipeline_name pipelineName,
+        pipeline_context pipelineContext,
+        create_time createTime,
+        update_time updateTime
+        from PIPELINE
+        where pipeline_name = #{pipelineName}
+    </select>
+
+    <select id="selectAll" resultType="com.cloudyellow.scheduler.model.PipelineModel">
+        select id,
+        pipeline_name pipelineName,
+        pipeline_context pipelineContext,
+        create_time createTime,
+        update_time updateTime
+        from PIPELINE
+    </select>
+
+<!--selectkey的方式插入id，不管id自增还不是不自增，都用适用，但是注意oracle和mysql的select的方式不一样-->
+    <insert id="insertByName" >
+        insert into PIPELINE(pipeline_name,pipeline_context,create_time,update_time)
+        value (#{pipelineName},#{pipelineContext},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+        <selectKey keyColumn="id" resultType="long" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+<!--JDBC自增ID的方式插入数据-->
+<!--    <insert id="insertByName"  useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into PIPELINE(pipeline_name,pipeline_context,create_time,update_time)-->
+<!--        value (#{pipelineName},#{pipelineContext},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})-->
+<!--    </insert>-->
+
+    <update id="updateByName">
+        update PIPELINE set pipeline_name=#{pipelineName},
+        pipeline_context=#{pipelineContext},
+        create_time=#{createTime,jdbcType=TIMESTAMP},
+        update_time=#{updateTime,jdbcType=TIMESTAMP}
+        where pipeline_name=#{pipelineName}
+    </update>
+    
+    <delete id="deleteByName">
+        delete from PIPELINE where pipeline_name=#{pipeline.pipelineName}
+    </delete>
+</mapper>
